@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([[
-            'id' => 1,
+            'id' => 6,
             'first_name' => 'admin',
             'last_name' => 'admin',
             'username' => 'admin',
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'identification_number' => '2343435DFDD'
         ]]);
         DB::table('users')->insert([[
-            'id' => 2,
+            'id' => 7,
             'first_name' => 'mechanic',
             'last_name' => 'mechanic',
             'username' => 'mechanic',
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         ]]);
         DB::table('mechanics')->insert([[
             'id' => 1,
-            'user_id' => 2,
+            'user_id' => 7,
             'status' => 'Ready'
         ]]);
     }
