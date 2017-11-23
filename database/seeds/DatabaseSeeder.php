@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             'first_name' => 'mechanic',
             'last_name' => 'mechanic',
             'username' => 'mechanic',
-            'email' => 'fayvorharrison101@gmail.com',
+            'email' => 'grantfayvor@yahoo.com',
             'password' => '$2y$10$1uaX5Se8JhxV8R1GZhp.AOa.rIaDzdvLQ4At4rOLGk9yPeS7pE3FK',
             'account_type' => 'Mechanic',
             'image_location' => '',
