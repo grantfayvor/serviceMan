@@ -11,17 +11,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([[
-            'id' => 6,
-            'first_name' => 'admin',
-            'last_name' => 'admin',
-            'username' => 'admin',
-            'email' => 'admin@example.com',
-            'password' => '$2y$10$1uaX5Se8JhxV8R1GZhp.AOa.rIaDzdvLQ4At4rOLGk9yPeS7pE3FK',
-            'account_type' => 'Admin',
-            'image_location' => '',
-            'identification_number' => '2343435DFDD'
-        ]]);
+        // DB::table('users')->insert([[
+        //     'id' => 6,
+        //     'first_name' => 'admin',
+        //     'last_name' => 'admin',
+        //     'username' => 'admin',
+        //     'email' => 'admin@example.com',
+        //     'password' => '$2y$10$1uaX5Se8JhxV8R1GZhp.AOa.rIaDzdvLQ4At4rOLGk9yPeS7pE3FK',
+        //     'account_type' => 'Admin',
+        //     'image_location' => '',
+        //     'identification_number' => '2343435DFDD'
+        // ]]);
         DB::table('users')->insert([[
             'id' => 7,
             'first_name' => 'mechanic',
