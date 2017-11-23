@@ -21,6 +21,7 @@ class CreateReservationsTable extends Migration
             $table->string('mechanic_name')->nullable(true);
             $table->double('cost')->nullable(true);
             $table->string('description');
+            $table->string('location');
 //            $table->date('date');
             $table->string('date');
             $table->boolean('assigned')->default(false);

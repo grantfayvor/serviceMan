@@ -36,7 +36,7 @@ class UserController extends Controller
         $username = $request->username;
         $password = $request->password;
         if ($this->userService->register($request) && $this->userService->authenticate($username, $password)) {
-            $user = Auth::user()->id;
+            $user = Auth::user();
             if("Mechanic" == $user->account_type){
                 $mechanic = $this->userService->getMechanicByUserId($user->id);
                 $request->session()->put('mechanicId', $mechanic->id);

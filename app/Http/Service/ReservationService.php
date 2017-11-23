@@ -92,13 +92,14 @@ class ReservationService
         $description = $request->description;
         $cost = $request->cost;
         $date = $request->date;
-        $location = $request->session()->get('location');
+        $location = $request->location ? $request->location : $request->session()->get('location');
         $customerName = $user->last_name . " " . $user->first_name;
         $this->reservation->setUser($user->id);
         $this->reservation->setCustomerName($customerName);
         $this->reservation->setDescription($description);
         $this->reservation->setCost($cost);
         $this->reservation->setDate($date);
+        $this->reservation->setLocation($location);
         if (!$this->repository->create($this->reservation->getAttributesArray())) {
             return response()->json(['message' => 'the resource was not created', 'data' => $this->reservation->getAttributesArray()], 500);
         }

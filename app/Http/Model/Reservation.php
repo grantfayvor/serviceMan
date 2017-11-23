@@ -23,6 +23,7 @@ class Reservation extends Model
     private $description;
     private $date;
     private $assigned;
+    private $location;
 
     /**
      * @return mixed
@@ -153,12 +154,28 @@ class Reservation extends Model
         $this->assigned = $assigned;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param mixed $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
 
     public function getAttributesArray()
     {
         return [
             'user_id' => $this->user,
             'customer_name' => $this->customerName,
+            'location' => $this->location,
 //            'mechanic_id' => $this->mechanic,
 //            'cost' => $this->cost,
             'description' => $this->description,

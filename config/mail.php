@@ -29,8 +29,8 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-//      'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    // 'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+     'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -73,6 +73,21 @@ return [
     */
 
     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+
+    /*
+    |------------------------------------------------------------------------
+    | SET SSL OPTIONS
+    |------------------------------------------------------------------------
+    | Here you may set the ssl configurations that work best for you.
+    |
+    */
+    'stream' => [
+        'ssl' => [
+            'allow_self_signed' => true,
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -33,7 +33,7 @@ Route::get('/reservations', 'MainController@allReservations');
 Route::post('/api/user/register', 'UserController@register')->name('user-register');
 Route::post('/api/user/authenticate', 'UserController@login')->name('authenticate');
 Route::put('/api/user/setLocation', 'UserController@setLocation');
-//Route::get('/api/user/getLocation', 'UserController@getLocation');
+Route::get('/api/user/getLocation', 'UserController@getLocation');
 Route::get('/api/users', 'UserController@getAllUsers');
 Route::get('/api/mechanics', 'UserController@getAllMechanics');
 Route::get('/api/admins', 'UserController@getAllAdmins');

@@ -202,11 +202,15 @@
                                     <div class="form-group"><label class="col-sm-3 control-label">Reservation Description</label>
 
                                         <div class="col-sm-6"><textarea class="form-control" data-ng-model="new_reservation.description" value=""
-                                                type="text" placeholder="why do you need a mechanic"></textarea></div>
+                                                type="text" placeholder="why do you need a mechanic" required=""></textarea></div>
+                                    </div>
+                                    <div class="form-group"><label class="col-sm-3 control-label">Reservation Location</label>
+                                        <div class="col-sm-6"><input data-ng-model="new_reservation.location" placeholder="Where do you need the mechanic?"
+                                                                     name="text" class="form-control" value="" required=""></div>
                                     </div>
                                     <div class="form-group"><label class="col-sm-3 control-label">When do you need the mechanic</label>
                                         <div class="col-sm-6"><input data-ng-model="new_reservation.date" placeholder="select reservation date - mm/dd/yyy"
-                                                name="daterange" class="form-control" value=""></div>
+                                                name="daterange" class="form-control" value="" required=""></div>
                                     </div>
                                 </form>
 
