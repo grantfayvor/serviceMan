@@ -226,8 +226,8 @@
                                                                     type="text" placeholder="why do you need a mechanic"></textarea></div>
                                 </div>
                                 <div class="form-group"><label class="col-sm-3 control-label">When do you need the mechanic</label>
-                                    <div class="col-sm-6"><input data-ng-model="new_reservation.date" placeholder="select reservation date - mm/dd/yyy"
-                                                                 name="daterange" type="text" class="form-control" value=""></div>
+                                    <div class="col-sm-6"><input placeholder="select reservation date - mm/dd/yyyy"
+                                                                 name="" type="date" data-ng-model="new_reservation.date" class="form-control"></div>
                                 </div>
                             </form>
 
