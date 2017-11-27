@@ -14,7 +14,11 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-
+    <!--app-->
+    <script src="app/angular.js"></script>
+    <script src="app/config/config.js"></script>
+    <script src="app/service/api-service.js"></script>
+    <script src="app/modules/user/user.js"></script>
 
 </head>
 
@@ -252,11 +256,7 @@
 <script src="js/inspinia.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
 
-<!--app-->
-<script src="app/angular.js"></script>
-<script src="app/config/config.js"></script>
-<script src="app/service/api-service.js"></script>
-<script src="app/modules/user/user.js"></script>
+
 
 <script>
     $(document).ready(function () {

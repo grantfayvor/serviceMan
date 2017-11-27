@@ -16,6 +16,12 @@
 
     <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
+    <!--app-->
+    <script src="app/angular.js"></script>
+    <script src="app/config/config.js"></script>
+    <script src="app/service/api-service.js"></script>
+    <script src="app/modules/reservation/reservation.js"></script>
+
 
     <style type="text/css"></style>
 </head>
@@ -261,11 +267,7 @@
     <!-- Data picker -->
     <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
-    <!--app-->
-    <script src="app/angular.js"></script>
-    <script src="app/config/config.js"></script>
-    <script src="app/service/api-service.js"></script>
-    <script src="app/modules/reservation/reservation.js"></script>
+    
 
     <script>
         $(document).ready(function () {

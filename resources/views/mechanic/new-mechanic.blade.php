@@ -14,6 +14,12 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <!--app-->
+    <script type="text/javascript" src="/app/angular.js"></script>
+    <script type="text/javascript" src="/app/config/config.js"></script>
+    <script type="text/javascript" src="/app/service/api-service.js"></script>
+    <script type="text/javascript" src="/app/modules/user/user.js"></script>
+
 </head>
 
 <body class="gray-bg" data-ng-controller="UserController">
@@ -76,12 +82,7 @@
 <!-- iCheck -->
 <script src="js/plugins/iCheck/icheck.min.js"></script>
 
-<!--app-->
-<script type="text/javascript" src="/app/angular.js"></script>
-<script type="text/javascript" src="/app/angular-sanitize.js"></script>
-<script type="text/javascript" src="/app/config/config.js"></script>
-<script type="text/javascript" src="/app/service/api-service.js"></script>
-<script type="text/javascript" src="/app/modules/user/user.js"></script>
+
 <script>
     $(document).ready(function(){
         $('.i-checks').iCheck({

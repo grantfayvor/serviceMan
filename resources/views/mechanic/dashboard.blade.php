@@ -12,6 +12,12 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <!--app-->
+    <script src="app/angular.js"></script>
+    <script src="app/config/config.js"></script>
+    <script src="app/service/api-service.js"></script>
+    <script src="app/modules/main.js"></script>
+
 </head>
 
 <body data-ng-controller="MainController" class="pace-done"><div class="pace  pace-inactive"><div class="pace-progress" style="transform: translate3d(100%, 0px, 0px);" data-progress-text="100%" data-progress="99">
@@ -161,11 +167,7 @@
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
 
-    <!--app-->
-    <script src="app/angular.js"></script>
-    <script src="app/config/config.js"></script>
-    <script src="app/service/api-service.js"></script>
-    <script src="app/modules/main.js"></script>
+    
 
     <script>
         $(document).ready(function(){

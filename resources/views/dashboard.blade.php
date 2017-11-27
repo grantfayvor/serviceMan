@@ -17,6 +17,12 @@
     <!-- Google Maps API -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC2k94EGV8e3uVNgElIEUSXa8X-Rfw8ZY&callback=initMap&sensor=false" async defer></script>
 
+    <!--app-->
+    <script src="app/angular.js"></script>
+    <script src="app/config/config.js"></script>
+    <script src="app/service/api-service.js"></script>
+    <script src="app/main.js"></script>
+
 </head>
 
 <body data-ng-controller="MainController" class="pace-done" data-ng-init="initialize()">
@@ -209,11 +215,7 @@
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
 
-    <!--app-->
-    <script src="app/angular.js"></script>
-    <script src="app/config/config.js"></script>
-    <script src="app/service/api-service.js"></script>
-    <script src="app/main.js"></script>
+    
 
     <script>
         $(document).ready(function () {
