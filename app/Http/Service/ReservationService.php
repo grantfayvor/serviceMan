@@ -100,6 +100,7 @@ class ReservationService
         $this->reservation->setCost($cost);
         $this->reservation->setDate($date);
         $this->reservation->setLocation($location);
+        return response()->json($this->reservation->getAttributesArray());
         if (!$this->repository->create($this->reservation->getAttributesArray())) {
             return response()->json(['message' => 'the resource was not created', 'data' => $this->reservation->getAttributesArray()], 500);
         }
