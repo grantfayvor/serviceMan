@@ -21,7 +21,7 @@ class UserController extends Controller
 //        return response()->json(array('result' => $this->userService->authenticate($username, $password)));
         if ($this->userService->authenticate($username, $password)) {
             $user = Auth::user();
-            if("Mechanic" == $user->account_type){
+            if ("Mechanic" == $user->account_type) {
                 $mechanic = $this->userService->getMechanicByUserId($user->id);
                 $request->session()->put('mechanicId', $mechanic->id);
             }
@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        $username = $request->username;
+        /*$username = $request->username;
         $password = $request->password;
         if ($this->userService->register($request) && $this->userService->authenticate($username, $password)) {
             $user = Auth::user();
@@ -45,6 +45,11 @@ class UserController extends Controller
         } else {
             return back()->withInput();
 //            return response()->json(array("result" => false));
+        }*/
+        if ($this->userService->register($request)) {
+            return back()->with(['message' => 'you have successfully registered and your account will be verified as soon as possible']);
+        } else {
+            return back()->withInput()->setContent('error creating the account');
         }
     }
 
