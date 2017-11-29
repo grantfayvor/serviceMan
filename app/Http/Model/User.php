@@ -19,6 +19,7 @@ class User extends Model
     private $lastName;
     private $username;
     private $email;
+    private $phoneNumber;
     private $password;
     private $accountType;
     private $imageLocation;
@@ -88,6 +89,22 @@ class User extends Model
         $this->email = $email;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param mixed $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
     public function getPassword()
     {
         return $this->password;
@@ -151,6 +168,7 @@ class User extends Model
             'last_name' => $this->lastName,
             'username' => $this->username,
             'email' => $this->email,
+            'phone_number' => $this->phoneNumber,
             'password' => $this->password,
             'account_type' => $this->accountType,
             'image_location' => $this->imageLocation,

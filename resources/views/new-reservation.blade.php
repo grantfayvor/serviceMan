@@ -212,11 +212,14 @@
                                     </div>
                                     <div class="form-group"><label class="col-sm-3 control-label">Reservation Location</label>
                                         <div class="col-sm-6"><input data-ng-model="new_reservation.location" placeholder="Where do you need the mechanic?"
-                                                                     name="text" class="form-control" value="" required=""></div>
+                                                name="text" class="form-control" value="" required=""></div>
                                     </div>
                                     <div class="form-group"><label class="col-sm-3 control-label">When do you need the mechanic</label>
-                                        <div class="col-sm-6"><input placeholder="select reservation date - mm/dd/yyyy"
-                                                name="" type="date" data-ng-model="new_reservation.date" class="form-control" required=""></div>
+                                        <div class="col-sm-6">
+                                            <!-- <input id="datepicker" placeholder="select reservation date - mm/dd/yyyy"
+                                                name="daterange" type="text" data-ng-model="new_reservation.date" ms-date-picker class="form-control" required=""> -->
+                                            <input id="datepicker" placeholder="select reservation date - mm/dd/yyyy" name="" type="date" data-ng-model="new_reservation.date"
+                                                class="form-control" required=""></div>
                                     </div>
                                 </form>
 
@@ -229,19 +232,19 @@
                 </div>
             </div>
             <!--modal-->
-			<div id="createModal" class="modal fade" aria-hidden="false" tabindex="-1" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-							<h4 class="modal-title">Success</h4>
-						</div>
-						<div class="modal-body">
-							<div class="form-group"><label>The reservation was successful</label></div>
-						</div>
-						<div class="modal-footer"><a href="/my-reservations" class="btn btn-info">Ok</a></div>
-					</div>
-				</div>
-			</div>
+            <div id="createModal" class="modal fade" aria-hidden="false" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Success</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group"><label>The reservation was successful</label></div>
+                        </div>
+                        <div class="modal-footer"><a href="/my-reservations" class="btn btn-info">Ok</a></div>
+                    </div>
+                </div>
+            </div>
             <div class="footer fixed_full">
                 <div class="pull-right">
                     10GB of <strong>250GB</strong> Free.
@@ -263,18 +266,18 @@
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
+    <!-- <script src="js/plugins/moment/min/moment.min.js"></script> -->
 
     <!-- Data picker -->
     <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
-    
+
 
     <script>
         $(document).ready(function () {
-
             $('input[name="daterange"]').datepicker();
-
         });
+        $(document).ajaxStart(function () { Pace.restart(); });
     </script>
 </body>
 

@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name', 55);
             $table->string('last_name', 55);
             $table->string('email', 120)->unique();
+            $table->string('phone_number', 100);
             $table->enum('account_type', ['Mechanic', 'User', 'Admin']);
             $table->string('password');
             $table->string('image_location');

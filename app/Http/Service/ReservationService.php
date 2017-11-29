@@ -25,12 +25,14 @@ class ReservationService
     private $repository;
     private $reservation;
     private $userService;
+    private $twilioService;
 
-    public function __construct(ReservationRepository $repository, Reservation $reservation, UserService $userService)
+    public function __construct(ReservationRepository $repository, Reservation $reservation, UserService $userService, TwilioService $twilioService)
     {
         $this->repository = $repository;
         $this->reservation = $reservation;
         $this->userService = $userService;
+        $this->twilioService = $twilioService;
     }
 
     public function getUserReservation($userId)
@@ -100,20 +102,25 @@ class ReservationService
         $this->reservation->setCost($cost);
         $this->reservation->setDate($date);
         $this->reservation->setLocation($location);
-        return response()->json($this->reservation->getAttributesArray());
         if (!$this->repository->create($this->reservation->getAttributesArray())) {
             return response()->json(['message' => 'the resource was not created', 'data' => $this->reservation->getAttributesArray()], 500);
         }
         $mechanics = $this->userService->getMechanics();
-        $nearbyMechanicsEmail = $this->classify($location, $mechanics);
-        if(count($nearbyMechanicsEmail) !== 0) {
-            foreach ($nearbyMechanicsEmail as $email) {
+        $nearbyMechanics = $this->classify($location, $mechanics);
+        if(count($nearbyMechanics) !== 0) {
+            /*foreach ($nearbyMechanics as $email) {
                 Mail::to($email)->queue(new ToMechanicsMail($location));
-            }
+            }*/
+            $this->twilioService->notifyThroughSms($nearbyMechanics, 'There is a customer waiting for your response at ' .$location);
         } else {
-            foreach($mechanics as $mechanic){
+            /*foreach($mechanics as $mechanic){
                 Mail::to($mechanic->user->email)->queue(new ToMechanicsMail($location));
-            }
+            }*/
+            /*$mechanicPhoneNumbers = array_map(function($obj){
+                return $obj->phone_number;
+            }, $mechanics);*/
+            $mechanicPhoneNumbers = $mechanics->pluck('phone_number'); /*array_column($mechanics, 'phone_number');*/
+            $this->twilioService->notifyThroughSms($mechanicPhoneNumbers, 'There is a customer waiting for your response at ' .$location);
         }
         return response()->json(['message' => 'the resource was successfully created', 'data' => $this->reservation->getAttributesArray()], 200);
     }
@@ -163,7 +170,9 @@ class ReservationService
 
             return response()->json(['message' => 'the resource was not updated', 'data' => $mechanic], 500);
         }
-        Mail::to($reservationUser->user->email)->queue(new MechanicAcceptMail($mechanic['mechanic_name'], $reservationUser->customer_name));
+//        Mail::to($reservationUser->user->email)->queue(new MechanicAcceptMail($mechanic['mechanic_name'], $reservationUser->customer_name));
+        $this->twilioService->notifyThroughSms([$reservationUser->user->phone_number], 'Dear ' .$reservationUser->customer_name .'. '
+            .'Your request for a mechanic has been accepted by ' .$mechanic['mechanic_name']);
         return response()->json(['message' => 'the resource was successfully updated', 'data' => $mechanic], 200);
     }
 
@@ -201,7 +210,8 @@ class ReservationService
                     $firstTextToCompare = preg_replace('/[ .,]+/', '', trim($userLocationSplit[$j - 1]));
                     $secondTextToCompare = preg_replace('/[ .,]+/', '', trim($mechanicLocationSplit[$i - 1]));
                     if (strcasecmp($firstTextToCompare, $secondTextToCompare)  === 0) {
-                        array_push($nearbyMechanics, $mechanic->user->email);
+//                        array_push($nearbyMechanics, $mechanic->user->email);
+                        array_push($nearbyMechanics, $mechanic->user->phone_number);
                         break;
                     }
                 }

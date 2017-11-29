@@ -35,6 +35,7 @@ class UserService
         $lastName = $request->lastName;
         $password = $request->password;
         $email = $request->email;
+        $phoneNumber = $request->phoneNumber;
         $identificationNumber = $request->identificationNumber;
         $photo = $request->file('photo');
         $imageLocation = "profile/" . $username . ".jpg";
@@ -42,6 +43,7 @@ class UserService
         $this->user->setLastName($lastName);
         $this->user->setUsername($username);
         $this->user->setEmail($email);
+        $this->user->setPhoneNumber($phoneNumber);
         $this->user->setPhoto($photo);
         $this->user->setImageLocation($imageLocation);
         $this->user->setAccountType("User");
@@ -59,6 +61,7 @@ class UserService
         $lastName = $request->lastName;
         $password = $request->password;
         $email = $request->email;
+        $phoneNumber = $request->phoneNumber;
         $identificationNumber = $request->identificationNumber;
         $photo = $request->file('photo');
         $imageLocation = "profile/admin/" . $username . ".jpg";
@@ -66,6 +69,7 @@ class UserService
         $this->user->setLastName($lastName);
         $this->user->setUsername($username);
         $this->user->setEmail($email);
+        $this->user->setPhoneNumber($phoneNumber);
         $this->user->setPhoto($photo);
         $this->user->setImageLocation($imageLocation);
         $this->user->setAccountType("Admin");
@@ -83,6 +87,7 @@ class UserService
         $lastName = $request->lastName;
         $password = $request->password;
         $email = $request->email;
+        $phoneNumber = $request->phoneNumber;
         $identificationNumber = $request->identificationNumber;
         $photo = $request->file('photo');
         $imageLocation = "profile/" . $username . ".jpg";
@@ -90,6 +95,7 @@ class UserService
         $this->user->setLastName($lastName);
         $this->user->setUsername($username);
         $this->user->setEmail($email);
+        $this->user->setPhoneNumber($phoneNumber);
         $this->user->setPhoto($photo);
         $this->user->setImageLocation($imageLocation);
         $this->user->setAccountType("Mechanic");

@@ -27,6 +27,8 @@ app.controller('ReservationController', ['$rootScope', '$scope', 'ReservationSer
 
 
     $scope.newReservation = function () {
+        // $scope.new_reservation.date = document.getElementById('datepicker');
+        // Pace.start;
         ReservationService.newReservation($scope.new_reservation, function (response) {
             $('#createModal').modal('show');
         }, function (response) {
