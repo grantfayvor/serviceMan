@@ -102,7 +102,8 @@ class ReservationService
         $this->reservation->setCost($cost);
         $this->reservation->setDate($date);
         $this->reservation->setLocation($location);
-        if (!$this->repository->create($this->reservation->getAttributesArray())) {
+        $reservation = $this->repository->create($this->reservation->getAttributesArray());
+        if (!$reservation) {
             return response()->json(['message' => 'the resource was not created', 'data' => $this->reservation->getAttributesArray()], 500);
         }
         $mechanics = $this->userService->getMechanics();
@@ -111,7 +112,7 @@ class ReservationService
             /*foreach ($nearbyMechanics as $email) {
                 Mail::to($email)->queue(new ToMechanicsMail($location));
             }*/
-            $this->twilioService->notifyThroughSms($nearbyMechanics, 'There is a customer waiting for your response at ' .$location);
+            $this->twilioService->notifyThroughSms($nearbyMechanics, 'Reply with ' .$reservation->id .'to accept a request at ' .$location);
         } else {
             /*foreach($mechanics as $mechanic){
                 Mail::to($mechanic->user->email)->queue(new ToMechanicsMail($location));
@@ -154,7 +155,7 @@ class ReservationService
 
     public function setReservationMechanic(Request $request)
     {
-        $user = $request->user();
+        /*$user = $request->user();
         if (isset($user->account_type) && !$user->account_type == "Mechanic") {
             return response()->json(['message' => 'you are not allowed to perform this operation'], 403);
         }
@@ -167,10 +168,24 @@ class ReservationService
             'assigned' => true
         ];
         if (!$this->repository->update($reservationId, $mechanic)) {
+            return response()->json(['message' => 'the resource was not updated', 'data' => $mechanic], 500);
+        }*/
+//        Mail::to($reservationUser->user->email)->queue(new MechanicAcceptMail($mechanic['mechanic_name'], $reservationUser->customer_name));
 
+        $mechanic = $this->userService->getByUsername($request->from);
+        $mechanicDetails = [
+            'mechanic_id' => $mechanic->id,
+            'mechanic_name' => $mechanic->last_name . " " . $mechanic->first_name,
+            'assigned' => true
+        ];
+        if (!$this->repository->update($request->body, $mechanicDetails)) {
             return response()->json(['message' => 'the resource was not updated', 'data' => $mechanic], 500);
         }
-//        Mail::to($reservationUser->user->email)->queue(new MechanicAcceptMail($mechanic['mechanic_name'], $reservationUser->customer_name));
+        if (isset($mechanic->account_type) && !$mechanic->account_type == "Mechanic") {
+            return response()->json(['message' => 'you are not allowed to perform this operation'], 403);
+        }
+        $reservationUser = $this->repository->getReservationWithUser(trim($request->body));
+        $this->twilioService->receiveReply($request);
         $this->twilioService->notifyThroughSms([$reservationUser->user->phone_number], 'Dear ' .$reservationUser->customer_name .'. '
             .'Your request for a mechanic has been accepted by ' .$mechanic['mechanic_name']);
         return response()->json(['message' => 'the resource was successfully updated', 'data' => $mechanic], 200);

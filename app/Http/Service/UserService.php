@@ -114,6 +114,11 @@ class UserService
         return $this->repository->getAllUsers();
     }
 
+    public function getByUsername($username)
+    {
+        return $this->repository->getByUsername($username);
+    }
+
     public function getAllAdmins()
     {
         return $this->repository->getByParam('account_type', 'Admin');

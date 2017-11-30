@@ -13,6 +13,7 @@ class MechanicAcceptMail extends Mailable
 
     public $mechanicName;
     public $customerName;
+    public $subject = 'Your reservation has been accepted';
 
     /**
      * Create a new message instance.

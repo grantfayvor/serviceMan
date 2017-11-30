@@ -54,8 +54,8 @@
                        placeholder="Email Address" type="text">
             </div>
             <div class="form-group">
-                <input class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" required=""
-                       placeholder="phoneNumber" type="text">
+                <input class="form-control" name="phoneNumber" value="{{ old('phoneNumber') ?: '+234' }}" required=""
+                       placeholder="phone number e.g +2348012345678" type="text">
             </div>
             <div class="form-group">
                 <input class="form-control" name="identificationNumber" value="{{ old('identificationNumber') }}"

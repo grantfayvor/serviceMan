@@ -11,6 +11,7 @@ namespace App\Http\Service;
 use Illuminate\Support\Facades\Log;
 use Twilio\Exceptions\TwilioException;
 use Twilio\Rest\Client;
+use Twilio\Twiml;
 
 class TwilioService {
 
@@ -54,6 +55,15 @@ class TwilioService {
                 'Could not send SMS notification.' .
                 ' Twilio replied with: ' . $e
             );
+        }
+    }
+
+    public function receiveReply($request){
+//        $from = $request->from;
+        $body = $request->body;
+        $response = new Twiml();
+        if($body) {
+            $response->message('You have successfully accepted the reservation');
         }
     }
 
