@@ -24,37 +24,45 @@ class TwilioService {
     {
         $this->sid = env('TWILIO_ACCOUNT_SID');
         $this->token = env('TWILIO_AUTH_TOKEN');
-        $this->number = env('TWILIO_NUMBER', null);
+        $this->number = env('TWILIO_NUMBER');
         $this->client = new Client($this->sid, $this->token);
     }
 
     public function notifyThroughSms($recipientNumbers, $message)
     {
+        $result = array();
         foreach ($recipientNumbers as $number) {
-            $this->sendSms(
+            array_push($result, $this->sendSms(
                 $number,
                 $message
-            );
+            ));
         }
+
+        return $result;
     }
 
     private function sendSms($to, $message)
     {
+        set_time_limit(100);
+        $test = preg_match('/^\++?[1-9]\d{1,14}$/', $to);
+        if($test != 1)
+        {
+            return "enter valid E-164 format for " .$to;
+        }
         try {
             $this->client->messages->create(
                 $to,
                 [
                     "body" => $message,
-                    "from" => $this->number,
+                    "from" => +15005550006/*$this->number*/,
                     'statusCallback' => 'https://requestb.in/11qge0v1'
                 ]
             );
-            Log::info('Message sent to ' . $to);
+            return 'Message sent to ' . $to;
         } catch (TwilioException $e) {
-            Log::error(
+            return
                 'Could not send SMS notification.' .
-                ' Twilio replied with: ' . $e
-            );
+                ' Twilio replied with: ' . $e;
         }
     }
 

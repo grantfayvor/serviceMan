@@ -109,17 +109,8 @@ class ReservationService
         $mechanics = $this->userService->getMechanics();
         $nearbyMechanics = $this->classify($location, $mechanics);
         if(count($nearbyMechanics) !== 0) {
-            /*foreach ($nearbyMechanics as $email) {
-                Mail::to($email)->queue(new ToMechanicsMail($location));
-            }*/
             $this->twilioService->notifyThroughSms($nearbyMechanics, 'Reply with ' .$reservation->id .'to accept a request at ' .$location);
         } else {
-            /*foreach($mechanics as $mechanic){
-                Mail::to($mechanic->user->email)->queue(new ToMechanicsMail($location));
-            }*/
-            /*$mechanicPhoneNumbers = array_map(function($obj){
-                return $obj->phone_number;
-            }, $mechanics);*/
             $mechanicPhoneNumbers = $mechanics->pluck('phone_number'); /*array_column($mechanics, 'phone_number');*/
             $this->twilioService->notifyThroughSms($mechanicPhoneNumbers, 'There is a customer waiting for your response at ' .$location);
         }
@@ -155,23 +146,6 @@ class ReservationService
 
     public function setReservationMechanic(Request $request)
     {
-        /*$user = $request->user();
-        if (isset($user->account_type) && !$user->account_type == "Mechanic") {
-            return response()->json(['message' => 'you are not allowed to perform this operation'], 403);
-        }
-        $reservationId = $request->reservationId;
-        $reservationUser = $this->repository->getReservationWithUser($reservationId);
-        $foundMechanicId = $request->session()->get('mechanicId');
-        $mechanic = [
-            'mechanic_id' => $foundMechanicId,
-            'mechanic_name' => $user->last_name . " " . $user->first_name,
-            'assigned' => true
-        ];
-        if (!$this->repository->update($reservationId, $mechanic)) {
-            return response()->json(['message' => 'the resource was not updated', 'data' => $mechanic], 500);
-        }*/
-//        Mail::to($reservationUser->user->email)->queue(new MechanicAcceptMail($mechanic['mechanic_name'], $reservationUser->customer_name));
-
         $mechanic = $this->userService->getByUsername($request->from);
         $mechanicDetails = [
             'mechanic_id' => $mechanic->id,
