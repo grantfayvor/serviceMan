@@ -119,6 +119,11 @@ class UserService
         return $this->repository->getByUsername($username);
     }
 
+    public function getByPhoneNumber($phoneNumber)
+    {
+        return $this->repository->getByPhoneNumber($phoneNumber);
+    }
+
     public function getAllAdmins()
     {
         return $this->repository->getByParam('account_type', 'Admin');

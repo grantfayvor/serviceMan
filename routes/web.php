@@ -53,7 +53,7 @@ Route::put('/api/reservation/update', 'ReservationController@update');
 Route::delete('/api/reservation/delete', 'ReservationController@delete');
 Route::get('/api/reservations/open', 'ReservationController@getOpenReservations');
 Route::get('/api/reservations/mechanic', 'ReservationController@getMechanicReservations');
-Route::put('/api/reservation/accept', 'ReservationController@acceptReservation');
+Route::post('/api/reservation/accept', 'ReservationController@acceptReservation');
 Route::get('/api/reservations/all', 'ReservationController@getAllReservations');
 Route::put('/api/reservation/decline', 'ReservationController@declineReservation');
 Route::get('/api/all-reservations', 'ReservationController@getAllSystemReservations');

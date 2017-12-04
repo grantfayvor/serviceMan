@@ -9,16 +9,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Service\ReservationService;
+use App\Http\Service\UserService;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
 
     private $service;
+    private $userService;
 
-    public function __construct(ReservationService $reservationService)
+    public function __construct(ReservationService $reservationService, UserService $userService)
     {
         $this->service = $reservationService;
+        $this->userService = $userService;
     }
 
     public function create(Request $request)
@@ -81,9 +84,10 @@ class ReservationController extends Controller
 
     public function acceptReservation(Request $request)
     {
-        $user = $request->user();
-        return "Mechanic" == $user->account_type
-            ? $this->service->setReservationMechanic($request)
+        $mechanic = $this->userService->getByPhoneNumber($request->input('From') ?: $request->input('from'));
+//        $user = $request->user();
+        return "Mechanic" == $mechanic->account_type
+            ? $this->service->setReservationMechanic($mechanic, $request)
             : response()->json(['message' => 'not allowed to perform this operation'], 403);
     }
 

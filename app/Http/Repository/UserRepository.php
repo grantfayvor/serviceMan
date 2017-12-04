@@ -35,4 +35,9 @@ class UserRepository extends BaseRepository
     {
         return $this->model->where('username', $username)->first();
     }
+
+    public function getByPhoneNumber($phoneNumber)
+    {
+        return $this->model->where('phone_number', $phoneNumber)->first();
+    }
 }

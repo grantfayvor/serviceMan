@@ -147,7 +147,7 @@ app.service('ReservationService', ['APIService', function (APIService) {
     };
 
     this.acceptReservation = function (reservationId, successHandler, errorHandler) {
-        APIService.put('/api/reservation/accept?reservationId=' + reservationId, {}, successHandler, errorHandler);
+        APIService.post('/api/reservation/accept?reservationId=' + reservationId, {}, successHandler, errorHandler);
     };
 
     this.deleteReservation = function (reservationId, successHandler, errorHandler) {

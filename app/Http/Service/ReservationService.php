@@ -144,15 +144,16 @@ class ReservationService
         return response()->json(['message' => 'the resource was successfully deleted']);
     }
 
-    public function setReservationMechanic(Request $request)
+    public function setReservationMechanic($mechanic, Request $request)
     {
-        $mechanic = $this->userService->getByUsername($request->from);
+//        $mechanic = $this->userService->getByUsername($request->from);
+//        $mechanic = $this->userService->getByPhoneNumber($request->input('From') ?: $request->input('from'));
         $mechanicDetails = [
             'mechanic_id' => $mechanic->id,
             'mechanic_name' => $mechanic->last_name . " " . $mechanic->first_name,
             'assigned' => true
         ];
-        if (!$this->repository->update($request->body, $mechanicDetails)) {
+        if (!$this->repository->update($request->input('Body') ?: $request->input('body'), $mechanicDetails)) {
             return response()->json(['message' => 'the resource was not updated', 'data' => $mechanic], 500);
         }
         if (isset($mechanic->account_type) && !$mechanic->account_type == "Mechanic") {
