@@ -68,11 +68,11 @@ class TwilioService {
 
     public function receiveReply($request){
 //        $from = $request->from;
-        $body = $request->body;
+//        $body = $request->body;
         $response = new Twiml();
-        if($body) {
-            $response->message('You have successfully accepted the reservation');
-        }
+//        if($body) {
+        return $response->message('You have successfully accepted the reservation');
+//        }
     }
 
 }

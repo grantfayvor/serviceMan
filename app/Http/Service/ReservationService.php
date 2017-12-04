@@ -160,10 +160,10 @@ class ReservationService
             return response()->json(['message' => 'you are not allowed to perform this operation'], 403);
         }
         $reservationUser = $this->repository->getReservationWithUser(trim($request->body));
-        $this->twilioService->receiveReply($request);
+        /*$this->twilioService->receiveReply($request);*/
         $this->twilioService->notifyThroughSms([$reservationUser->user->phone_number], 'Dear ' .$reservationUser->customer_name .'. '
             .'Your request for a mechanic has been accepted by ' .$mechanic['mechanic_name']);
-        return response()->json(['message' => 'the resource was successfully updated', 'data' => $mechanic], 200);
+        return $this->twilioService->receiveReply($request); /*response()->json(['message' => 'the resource was successfully updated', 'data' => $mechanic], 200);*/
     }
 
     public function removeReservationMechanic(Request $request)
