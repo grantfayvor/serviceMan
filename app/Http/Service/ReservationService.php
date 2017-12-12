@@ -90,6 +90,7 @@ class ReservationService
 
     public function create(Request $request)
     {
+        $result = null;
         $user = $request->user();
         $description = $request->description;
         $cost = $request->cost;
@@ -109,12 +110,12 @@ class ReservationService
         $mechanics = $this->userService->getMechanics();
         $nearbyMechanics = $this->classify($location, $mechanics);
         if(count($nearbyMechanics) !== 0) {
-            $this->twilioService->notifyThroughSms($nearbyMechanics, 'Reply with ' .$reservation->id .'to accept a request at ' .$location);
+            $result = $this->twilioService->notifyThroughSms($nearbyMechanics, 'Reply with ' .$reservation->id .'to accept a request at ' .$location);
         } else {
             $mechanicPhoneNumbers = $mechanics->pluck('phone_number'); /*array_column($mechanics, 'phone_number');*/
-            $this->twilioService->notifyThroughSms($mechanicPhoneNumbers, 'There is a customer waiting for your response at ' .$location);
+            $result = $this->twilioService->notifyThroughSms($mechanicPhoneNumbers, 'Reply with ' .$reservation->id .'to accept a request at ' .$location);
         }
-        return response()->json(['message' => 'the resource was successfully created', 'data' => $this->reservation->getAttributesArray()], 200);
+        return response()->json(['message' => 'the resource was successfully created', 'data' => $this->reservation->getAttributesArray(), 'twilioMessage' => $result], 200);
     }
 
     public function update(Request $request)
