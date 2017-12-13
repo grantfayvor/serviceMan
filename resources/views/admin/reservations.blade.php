@@ -195,7 +195,7 @@
                                                 <span data-ng-bind="reservation.customer_name"></span>
                                             </td>
                                             <td class="col-sm-2 col-md-2">
-                                                <span data-ng-bind="reservation.mechanic_name ? reservation.mechanic_name : 'not yet assigned"></span>
+                                                <span data-ng-bind="reservation.mechanic_name ? reservation.mechanic_name : 'not yet assigned'"></span>
                                             </td>
                                             <td class="col-sm-3 col-md-3">
                                                 <!-- <small>Created by Peter Williams</small> -->

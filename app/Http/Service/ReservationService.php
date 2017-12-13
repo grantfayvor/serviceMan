@@ -115,7 +115,7 @@ class ReservationService
             $mechanicPhoneNumbers = $mechanics->pluck('phone_number'); /*array_column($mechanics, 'phone_number');*/
             $result = $this->twilioService->notifyThroughSms($mechanicPhoneNumbers, 'Reply with ' .$reservation->id .'to accept a request at ' .$location);
         }
-        return response()->json(['message' => 'the resource was successfully created', 'data' => $this->reservation->getAttributesArray(), 'twilioMessage' => $result], 200);
+        return response()->json(['message' => 'the resource was successfully created', 'data' => $reservation, 'twilioMessage' => $result], 200);
     }
 
     public function update(Request $request)
