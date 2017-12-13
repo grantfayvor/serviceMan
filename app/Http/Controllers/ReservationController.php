@@ -86,9 +86,10 @@ class ReservationController extends Controller
     {
         $mechanic = $this->userService->getByPhoneNumber($request->input('From') ?: $request->input('from'));
 //        $user = $request->user();
-        return "Mechanic" == $mechanic->account_type
-            ? $this->service->setReservationMechanic($mechanic, $request)
-            : response()->json(['message' => 'not allowed to perform this operation', 'data' => $mechanic], 403);
+        return $this->service->setReservationMechanic($mechanic, $request);
+//        return "Mechanic" == $mechanic->account_type
+//            ? $this->service->setReservationMechanic($mechanic, $request)
+//            : response()->json(['message' => 'not allowed to perform this operation', 'data' => $mechanic], 403);
     }
 
     public function declineReservation(Request $request)
