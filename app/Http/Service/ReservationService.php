@@ -154,13 +154,14 @@ class ReservationService
             'mechanic_name' => $mechanic->last_name . " " . $mechanic->first_name,
             'assigned' => true
         ];
-        if (!$this->repository->update($request->input('Body') ?: $request->input('body'), $mechanicDetails)) {
+        $body = $request->input('Body') ?: $request->input('body');
+        if (!$this->repository->update(trim($body), $mechanicDetails)) {
             return response()->json(['message' => 'the resource was not updated', 'data' => $mechanic], 500);
         }
         if (isset($mechanic->account_type) && !$mechanic->account_type == "Mechanic") {
             return response()->json(['message' => 'you are not allowed to perform this operation'], 403);
         }
-        $reservationUser = $this->repository->getReservationWithUser(trim($request->body));
+        $reservationUser = $this->repository->getReservationWithUser(trim($body));
         /*$this->twilioService->receiveReply($request);*/
         $this->twilioService->notifyThroughSms([$reservationUser->user->phone_number], 'Dear ' .$reservationUser->customer_name .'. '
             .'Your request for a mechanic has been accepted by ' .$mechanic['mechanic_name']);
