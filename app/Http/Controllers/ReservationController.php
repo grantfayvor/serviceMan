@@ -96,7 +96,7 @@ class ReservationController extends Controller
         $user = $request->user();
         return "Mechanic" == $user->account_type
             ? $this->service->removeReservationMechanic($request)
-            : response()->json(['message' => 'not allowed to perform this operation'], 403);
+            : response()->json(['message' => 'not allowed to perform this operation', 'data' => $user], 403);
     }
 
 }
