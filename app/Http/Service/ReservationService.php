@@ -110,7 +110,7 @@ class ReservationService
         $mechanics = $this->userService->getMechanics();
         $nearbyMechanics = $this->classify($location, $mechanics);
         if(count($nearbyMechanics) !== 0) {
-            $result = $this->twilioService->notifyThroughSms($nearbyMechanics, 'Reply with ' .$reservation->id .'to accept a request at ' .$location);
+            $result = $this->twilioService->notifyThroughSms($nearbyMechanics, 'Reply with ' .$reservation->id .' to accept a request at ' .$location);
         } else {
             $mechanicPhoneNumbers = $mechanics->pluck('phone_number'); /*array_column($mechanics, 'phone_number');*/
             $result = $this->twilioService->notifyThroughSms($mechanicPhoneNumbers, 'Reply with ' .$reservation->id .'to accept a request at ' .$location);
